@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benutzerverwaltung</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Benutzerverwaltung</h1>
+        <form id="createUserForm">
+            <label for="username">Benutzername:</label>
+            <input type="text" id="username" required>
+
+            <label for="role">Rolle:</label>
+            <select id="role">
+                <option value="User">User</option>
+                <option value="Moderator">Moderator</option>
+                <option value="Admin">Admin</option>
+            </select>
+
+            <label for="permissions">Berechtigungen:</label>
+            <textarea id="permissions" placeholder="Z.B. Zugriff auf Tickets, Chat..."></textarea>
+
+            <label for="timeout">Timeout (in Minuten):</label>
+            <input type="number" id="timeout" min="0" placeholder="0 für keinen Timeout">
+
+            <button type="submit">Benutzer Erstellen</button>
+            <p id="userFeedback" class="error"></p>
+        </form>
+        <div id="userList">
+            <h2>Bestehende Benutzer</h2>
+            <ul id="users">
+                <!-- Benutzer werden hier dynamisch eingefügt -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

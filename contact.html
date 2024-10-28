@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Kontaktieren Sie uns</h1>
+        <form id="ticketForm">
+            <label for="reason">Grund</label>
+            <input type="text" id="reason" required>
+
+            <label for="person">Ansprechpartner</label>
+            <input type="text" id="person" required>
+
+            <label for="description">Beschreibung</label>
+            <textarea id="description" required></textarea>
+
+            <label for="urgency">Dringlichkeit</label>
+            <select id="urgency">
+                <option value="Low">Niedrig</option>
+                <option value="Medium">Mittel</option>
+                <option value="High">Hoch</option>
+            </select>
+
+            <button type="submit">Ticket Erstellen</button>
+        </form>
+        <p id="ticketError" class="error"></p>
+    </div>
+
+    <script>
+        const tickets = JSON.parse(localStorage.getItem('tickets')) || [];
+
+        document.getElementById('ticketForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const reason = document.getElementById('reason').value;
+            const person = document.getElementById('person').value;
+            const description = document.getElementById('description').value;
+            const urgency = document.getElementById('urgency').value;
+
+            tickets.push({ reason, person, description, urgency });
+            localStorage.setItem('tickets', JSON.stringify(tickets));
+
+            document.getElementById('ticketError').textContent = 'Ticket erfolgreich erstellt!';
+            document.getElementById('ticketForm').reset();
+        });
+    </script>
+</body>
+</html>

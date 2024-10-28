@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Forum</h1>
+        <form id="forumForm">
+            <label for="message">Nachricht</label>
+            <textarea id="message" required></textarea>
+            <button type="submit">Posten</button>
+        </form>
+
+        <div id="forumPosts"></div>
+    </div>
+
+    <script>
+        const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
+
+        document.getElementById('forumForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = document.getElementById('message').value;
+            posts.push({ message, user: user.username });
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            displayPosts();
+        });
+
+        function displayPosts() {
+            const forumPostsDiv = document.getElementById('forumPosts');
+            forumPostsDiv.innerHTML = posts.map(post => `
+                <div>
+                    <strong>${post.user}:</strong> ${post.message}
+                </div>
+            `).join('');
+        }
+
+        displayPosts();
+    </script>
+</body>
+</html>

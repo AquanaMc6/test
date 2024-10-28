@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Willkommen, Benutzer</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+                <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+
+        if (!user) {
+            alert('Bitte loggen Sie sich ein.');
+            window.location.href = 'index.html';
+        }
+
+        document.getElementById('logout').addEventListener('click', function() {
+            sessionStorage.removeItem('loggedInUser');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
